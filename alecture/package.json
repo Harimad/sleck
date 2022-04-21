@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "cross-env TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack serve --env development",
     "build": "cross-env NODE_ENV=production TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -28,13 +29,17 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.5",
     "@types/node": "^17.0.25",
     "@types/webpack": "^5.28.0",
+    "@types/webpack-dev-server": "^3.11.1",
     "babel-loader": "^8.2.5",
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "fork-ts-checker-webpack-plugin": "^7.2.6",
     "prettier": "^2.6.2",
-    "webpack": "^5.72.0"
+    "webpack": "^5.72.0",
+    "webpack-dev-server": "^3.11.2"
   }
 }

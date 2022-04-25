@@ -1,12 +1,13 @@
+import useInput from "@hooks/useInput";
 import React, { useCallback, useState } from "react";
 import { Success, Form, Error, Label, Input, LinkContainer, Button, Header } from "./styles";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
-  const [email, setEmail] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordCheck, setPasswordCheck] = useState("");
+  const [email, onChangeEmail] = useInput("");
+  const [nickname, onChangeNickname] = useInput("");
+  const [password, , setPassword] = useInput("");
+  const [passwordCheck, , setPasswordCheck] = useInput("");
   const [mismatchError, setMismatchError] = useState(false);
   const [signUpError, setSignUpError] = useState("");
   const [signUpSuccess, setSignUpSuccess] = useState(false);
@@ -21,10 +22,6 @@ const SignUp = () => {
     [email, nickname, password, passwordCheck, mismatchError],
   );
 
-  const onChangeEmail = useCallback((e: React.ChangeEvent<any>) => {
-    setEmail(e.target.value);
-  }, []);
-
   const onChangePassword = useCallback(
     (e: React.ChangeEvent<any>) => {
       setPassword(e.target.value);
@@ -32,10 +29,6 @@ const SignUp = () => {
     },
     [passwordCheck],
   );
-
-  const onChangeNickname = useCallback((e: React.ChangeEvent<any>) => {
-    setNickname(e.target.value);
-  }, []);
 
   const onChangePasswordCheck = useCallback(
     (e: React.ChangeEvent<any>) => {

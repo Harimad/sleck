@@ -11,11 +11,39 @@ const SignUp = () => {
   const [signUpError, setSignUpError] = useState("");
   const [signUpSuccess, setSignUpSuccess] = useState(false);
 
-  const onSubmit = useCallback(() => {}, []);
-  const onChangeEmail = useCallback(() => {}, []);
-  const onChangePassword = useCallback(() => {}, []);
-  const onChangeNickname = useCallback(() => {}, []);
-  const onChangePasswordCheck = useCallback(() => {}, []);
+  const onSubmit = useCallback(
+    (e: React.ChangeEvent<any>) => {
+      e.preventDefault();
+      if (!mismatchError) {
+        console.log("서버로 회원가입하기");
+      }
+    },
+    [email, nickname, password, passwordCheck, mismatchError],
+  );
+
+  const onChangeEmail = useCallback((e: React.ChangeEvent<any>) => {
+    setEmail(e.target.value);
+  }, []);
+
+  const onChangePassword = useCallback(
+    (e: React.ChangeEvent<any>) => {
+      setPassword(e.target.value);
+      setMismatchError(e.target.value !== passwordCheck);
+    },
+    [passwordCheck],
+  );
+
+  const onChangeNickname = useCallback((e: React.ChangeEvent<any>) => {
+    setNickname(e.target.value);
+  }, []);
+
+  const onChangePasswordCheck = useCallback(
+    (e: React.ChangeEvent<any>) => {
+      setPasswordCheck(e.target.value);
+      setMismatchError(e.target.value !== password);
+    },
+    [password],
+  );
 
   return (
     <div id="container">
@@ -52,8 +80,8 @@ const SignUp = () => {
           </div>
           {mismatchError && <Error>비밀번호가 일치하지 않습니다.</Error>}
           {!nickname && <Error>닉네임을 입력해주세요.</Error>}
-          {signUpError && <Error>{signUpError}</Error>}
-          {signUpSuccess && <Success>회원가입되었습니다! 로그인해주세요.</Success>}
+          {/* {signUpError && <Error>{signUpError}</Error>} */}
+          {/* {signUpSuccess && <Success>회원가입되었습니다! 로그인해주세요.</Success>} */}
         </Label>
         <Button type="submit">회원가입</Button>
       </Form>

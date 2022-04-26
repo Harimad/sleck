@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import useSWR from "swr";
 
 const LogIn = () => {
-  const { data, error } = useSWR("/api/users", fetcher);
+  const { data, error, mutate } = useSWR("/api/users", fetcher);
 
   const [logInError, setLogInError] = useState(false);
   const [email, onChangeEmail] = useInput("");
@@ -16,12 +16,11 @@ const LogIn = () => {
     (e: React.ChangeEvent<any>) => {
       e.preventDefault();
       setLogInError(false);
-      axios.post("/api/users/login", { email, password }, { withCredentials: true });
-      // .then((response) => {
-      //   revalidate();
-      // })
+      axios.post("/api/users/login", { email, password }, { withCredentials: true }).then((response) => {
+        mutate();
+      });
       // .catch((error) => {
-      //   setLogInError(error.response?.data?.statusCode === 401);
+      // setLogInError(error.response?.data?.statusCode === 401);
       // });
     },
     [email, password],

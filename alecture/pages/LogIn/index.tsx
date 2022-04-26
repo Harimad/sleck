@@ -1,10 +1,14 @@
 import useInput from "@hooks/useInput";
 import { Success, Form, Error, Label, Input, LinkContainer, Button, Header } from "@pages/SignUp/styles";
+import fetcher from "@utils/fetcher";
 import axios from "axios";
 import React, { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
+import useSWR from "swr";
 
 const LogIn = () => {
+  const { data, error } = useSWR("/api/users", fetcher);
+
   const [logInError, setLogInError] = useState(false);
   const [email, onChangeEmail] = useInput("");
   const [password, onChangePassword] = useInput("");

@@ -1,10 +1,14 @@
 import useInput from "@hooks/useInput";
+import fetcher from "@utils/fetcher";
 import React, { useCallback, useState } from "react";
 import axios from "axios";
+import useSWR from "swr";
 import { Success, Form, Error, Label, Input, LinkContainer, Button, Header } from "./styles";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 const SignUp = () => {
+  const { data, error, mutate } = useSWR("/api/users", fetcher);
+
   const [email, onChangeEmail] = useInput("");
   const [nickname, onChangeNickname] = useInput("");
   const [password, , setPassword] = useInput("");
@@ -51,6 +55,10 @@ const SignUp = () => {
     },
     [password],
   );
+
+  if (data) {
+    return <Redirect to="/workspace/channel" />;
+  }
 
   return (
     <div id="container">

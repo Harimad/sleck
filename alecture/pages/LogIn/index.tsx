@@ -3,7 +3,7 @@ import { Success, Form, Error, Label, Input, LinkContainer, Button, Header } fro
 import fetcher from "@utils/fetcher";
 import axios from "axios";
 import React, { useCallback, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import useSWR from "swr";
 
 const LogIn = () => {
@@ -26,13 +26,13 @@ const LogIn = () => {
     [email, password],
   );
 
-  // if (data === undefined) {
-  //   return <div>로딩중...</div>;
-  // }
+  if (data === undefined) {
+    return <div>로딩중...</div>;
+  }
 
-  // if (data) {
-  //   return <Redirect to="/workspace/sleact/channel/일반" />;
-  // }
+  if (data) {
+    return <Redirect to="/workspace/channel" />;
+  }
 
   return (
     <div id="container">
